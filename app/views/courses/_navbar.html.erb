@@ -1,5 +1,15 @@
-<strong>
-  <%= link_to course, course %>:
-</strong>
-<%= link_to 'Assignments', course_assignments_path(course_id: course.id) %>
-<%= link_to 'Students', students_course_path(id: course.id) %>
+<header class="navbar navbar-fixed-top navbar-inverse">
+  <div class="container">
+    <%= link_to course, course %>:
+    <nav>
+      <ul class="nav navbar-nav navbar-right">
+        <%= link_to 'Assignments', course_assignments_path(course_id: course.id) %>
+		<%= link_to 'Students', students_course_path(id: course.id) %>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+
+
+

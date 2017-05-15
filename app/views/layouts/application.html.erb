@@ -1,16 +1,23 @@
 <!DOCTYPE html>
 <html>
+<header class="navbar navbar-fixed-top navbar-inverse">
+  <div class="container">
+    <nav>
+      <ul class="nav navbar-nav navbar-right">
+        <li><%= link_to 'courses', courses_path %></li>
+        <li><%= link_to 'people', people_path %></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
   <head>
     <title>ProyectoRailsBase</title>
     <%= csrf_meta_tags %>
-
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
-
   <body>
-    <%= link_to 'courses', courses_path %>
-    <%= link_to 'people', people_path %>
     <% if @course %>
       <div>
         <%= render 'courses/navbar', course: @course %>

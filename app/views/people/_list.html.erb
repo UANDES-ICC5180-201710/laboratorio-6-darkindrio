@@ -1,4 +1,4 @@
-<table>
+<table class = "table">
   <% if person_signed_in? %>
       <p> hello, <%= current_person.first_name %>
         <%= link_to "Sign out", destroy_person_session_path, :method => :delete %>
