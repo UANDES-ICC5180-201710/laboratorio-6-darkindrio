@@ -17,6 +17,12 @@ class PeopleController < ApplicationController
     @person = Person.new
   end
 
+  def destroySess
+   current_user.deactivate_user(@user)
+   sign_out(@user)
+   redirect_to user_path(@user)
+  end
+
   # GET /people/1/edit
   def edit
   end
@@ -28,6 +34,7 @@ class PeopleController < ApplicationController
 
     respond_to do |format|
       if @person.save
+        sign_in(@person, scope: :user)
         format.html { redirect_to @person, notice: 'Person was successfully created.' }
         format.json { render :show, status: :created, location: @person }
       else
@@ -61,14 +68,25 @@ class PeopleController < ApplicationController
     end
   end
 
+  def destroy_current_people
+    current_user.deactivate_user(@person)
+    sign_out(@person)
+    redirect_to people_path
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_person
-      @person = Person.find(params[:id])
+      if params[:id] != "sign_out"
+        @person = Person.find(params[:id])
+      else
+        sign_out current_person
+        redirect_to people_path
+      end
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def person_params
-      params.require(:person).permit(:first_name, :last_name, :email, :email_confirmation)
+      params.require(:person).permit(:first_name, :last_name, :email, :email_confirmation, :password)
     end
 end

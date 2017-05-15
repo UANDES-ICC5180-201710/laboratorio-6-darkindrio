@@ -4,6 +4,10 @@
 
 <%= render 'list', people: @people %>
 
+<% if !person_signed_in? %>
+        <%= link_to "Log in", person_session_path, :method => :post %>   
+<% end %>
+
 <br>
 
 <%= link_to 'New Person', new_person_path %>
